@@ -1,0 +1,29 @@
+1) How to compare two json have the same propertise without order.
+
+let obj1 = {name : "person1",age : "5"};
+let obj2 = {name : "person1",age : "5"};
+let myjson = JSON.stringify(obj1,obj2);
+if (myjson === myjson){
+console.log(true);
+}
+console.log(myjson);
+
+2)
+
+let xhr = new XMLHttpRequest();
+xhr.open("GET", "https://restcountries.com/v3.1/all")
+xhr.send();
+xhr.onload = () => {
+    let data = JSON.parse(xhr.response)
+     /* console.log(data) */
+    let answer = data.filter((dummy) => (dummy.currencies !== undefined))
+    console.log(answer.length)
+    let realanswer = answer.filter((data) =>  {
+    for (let key in data.currencies) {
+        if(data.currencies[key].name === "United States dollar"){
+      return data
+      }
+    }
+    })
+    console.log(realanswer.length, realanswer[0].currencies)
+}
